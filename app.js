@@ -10,6 +10,8 @@ const post = (url, data, headers = {}) => {
   });
 };
 
+const baseAPI = "http://192.168.9.67:5110"
+
 const init = () => {
   const compileBtns = document.querySelectorAll(".compile__btn");
   const SCSScompileBtns = document.querySelectorAll(".compile__scss_btn");
@@ -17,7 +19,7 @@ const init = () => {
     const btn = compileBtns[i];
     btn.onclick = () => {
       if (btn.id) {
-        post(`http://localhost:5110/js-watch`, {
+        post(`${baseAPI}/js-watch`, {
           inputVal: "",
           outputVal: "",
           id: btn.id,
@@ -40,7 +42,7 @@ const init = () => {
         alert("两个路径不能为空");
         return;
       }
-      post(`http://localhost:5110/js-watch`, {
+      post(`${baseAPI}/js-watch`, {
         inputVal,
         outputVal,
         isCheck: checkbox,
@@ -58,7 +60,7 @@ const init = () => {
     const btn = SCSScompileBtns[i];
     btn.onclick = () => {
       if (btn.id) {
-        post(`http://localhost:5110/scss-watch`, {
+        post(`${baseAPI}/scss-watch`, {
           inputVal: "",
           outputVal: "",
           id: btn.id,
@@ -81,7 +83,7 @@ const init = () => {
         alert("两个路径不能为空");
         return;
       }
-      post(`http://localhost:5110/scss-watch`, {
+      post(`${baseAPI}/scss-watch`, {
         inputVal,
         outputVal,
         isCheck: checkbox,
