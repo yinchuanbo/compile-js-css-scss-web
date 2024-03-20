@@ -10,7 +10,12 @@ const post = (url, data, headers = {}) => {
   });
 };
 
-const baseAPI = "http://192.168.9.67:5110"
+const baseAPI = "http://192.168.9.67:5110";
+
+function isValidPath(path) {
+  var pathPattern = /^[a-zA-Z]:\\[^*|"<>?\n]*$/;
+  return pathPattern.test(path);
+}
 
 const init = () => {
   const compileBtns = document.querySelectorAll(".compile__btn");
@@ -40,6 +45,10 @@ const init = () => {
       const outputVal = outputDom.value.trim();
       if (!inputVal || !outputVal) {
         alert("两个路径不能为空");
+        return;
+      }
+      if(!isValidPath(inputVal) || !isValidPath(outputVal)) {
+        alert("路径不合法");
         return;
       }
       post(`${baseAPI}/js-watch`, {
@@ -81,6 +90,10 @@ const init = () => {
       const outputVal = outputDom.value.trim();
       if (!inputVal || !outputVal) {
         alert("两个路径不能为空");
+        return;
+      }
+      if(!isValidPath(inputVal) || !isValidPath(outputVal)) {
+        alert("路径不合法");
         return;
       }
       post(`${baseAPI}/scss-watch`, {
@@ -136,7 +149,7 @@ for (let i = 0; i < adds.length; i++) {
       </div>
     </div>`;
     html = type === "js" ? htmlJs : htmlScss;
-    add.insertAdjacentHTML('beforebegin', html);
+    add.insertAdjacentHTML("beforebegin", html);
     init();
   };
 }
